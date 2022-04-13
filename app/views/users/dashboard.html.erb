@@ -1,0 +1,52 @@
+<%= render "layouts/header" %>
+<main>
+  <section class="py-5 container">
+    <div class="row ">
+      <div class="col-md-6">
+        <h1>Welcome <%= @current_user.email %></h1>    
+      </div>
+      <div class="col-md-6" style="text-align:right;">
+        <%= link_to "Add Notes", new_article_path, class: "btn btn-primary" %>
+        <%= button_to "Logout", { action: "logout"},
+        method: :get,class: "btn btn-danger" %>      </div>
+      <div class="col-lg-12 col-md-8">
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% 
+      i = 0
+      if @articles.length > 0
+        @articles.each do |article|
+          i +=1  
+          %>
+
+            <tr>
+              <th scope="row"><%= i %></th>
+              <td><%= article.title %></td>
+              <td><%= article.body %></td>
+              <td>
+                <%= link_to "Add Users", users_addusers_path(:article_id => article.id),class: "btn btn-success mt-1" %> 
+                <%= button_to "Change Permission", { action: "destroy", :controller=>"articles", id: article.id },
+                                    method: :delete, data: { confirm: "Are you sure?" },class: "btn btn-info mt-1" %>
+                <%= button_to "Delete Note", { action: "destroy", :controller=>"articles", id: article.id },
+                                    method: :delete, data: { confirm: "Are you sure?" },class: "btn btn-danger mt-1" %>
+              </td>
+            </tr>
+          <% 
+        end
+      end
+      %> 
+      </tbody>
+    </table>
+      </div>
+    </div>
+  </section>
+</main>
+<%= render 'layouts/footer' %>

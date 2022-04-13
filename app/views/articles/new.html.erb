@@ -1,0 +1,22 @@
+<%= render "layouts/header" %>
+<main>
+  <section class="py-5 container">
+    <div class="row ">
+    <% flash.each do |type, msg| %>
+      <div class="alert alert-info">
+          <%= msg %>
+      </div>
+      <% end %>
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <%= form_for @article, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+            <%= f.label :title, "Enter Note Title" %>
+            <%= f.text_field :title,class:"form-control" %>
+            <%= f.label :body, "Enter Note Content" %>
+            <%= f.text_area :body, size: "60x12",class:"form-control" %>
+            <%= f.submit "Create",class:"btn btn-info mt-2" %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</main>
+<%= render 'layouts/footer' %>

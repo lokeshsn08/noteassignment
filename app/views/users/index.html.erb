@@ -1,0 +1,24 @@
+<%= render "layouts/header" %>
+<main>
+  <section class="py-5 container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+      <% if flash[:notice] %>
+        <%= content_tag :h1, flash[:notice] %>
+        <% else %>
+        <%= content_tag :h1, "Please Log in",class: "text-center" %>
+        <% end %>
+        <%= form_with url: users_login_path, class: 'form-control text-left p-3' do |f| %>
+            <%= f.label :email, "Enter Username" %>
+            <%= f.text_field :email, class: 'form-control', required: 'true' %><br>
+            <%= f.label :email, "Enter Password" %>
+            <%= f.password_field :password, class: 'form-control', required: 'true' %><br>
+            <%= link_to "Register" , new_user_path ,class: "btn btn-primary" %>
+        <%= f.submit "Login",class: 'btn btn-secondary' %>
+      <% end %>
+      
+      </div>
+    </div>
+  </section>
+</main>
+<%= render 'layouts/footer' %>
